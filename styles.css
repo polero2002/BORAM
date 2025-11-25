@@ -1101,49 +1101,6 @@ main {
         font-size: 0.65rem;
     }
 
-    .video-controls {
-        padding: 14px 10px;
-        padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
-        gap: 10px;
-        background: #202020;
-        position: sticky;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .control-btn {
-        padding: 10px 6px;
-        min-width: 0;
-        flex: 1;
-        gap: 6px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        border-radius: 14px;
-        background: #2f2f2f;
-    }
-
-    .control-icon {
-        font-size: 22px;
-        line-height: 1;
-    }
-
-    .control-label {
-        font-size: 12px;
-        line-height: 1;
-        white-space: nowrap;
-    }
-
     /* Chat móvil */
     .chat-section {
         right: 0;
@@ -1435,52 +1392,11 @@ main {
     }
 
     /* Videollamada compacta */
-    .video-controls {
-        padding: 12px 8px;
-        padding-bottom: calc(26px + env(safe-area-inset-bottom, 0px));
-        gap: 8px;
-        position: sticky;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
-        background: #202020;
-    }
-
     .self-video {
         width: 90px;
         height: 68px;
-        bottom: calc(140px + env(safe-area-inset-bottom, 0px));
+        bottom: 100px;
         right: 8px;
-    }
-
-    .control-btn {
-        padding: 9px 4px;
-        min-width: 0;
-        flex: 1;
-        gap: 4px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-radius: 12px;
-        background: #2f2f2f;
-    }
-
-    .control-icon {
-        font-size: 20px;
-        line-height: 1;
-    }
-
-    .control-label {
-        font-size: 11px;
-        line-height: 1;
-        white-space: nowrap;
     }
 
     .session-info h3 {
@@ -2343,36 +2259,79 @@ main {
     border-color: var(--primary-color);
 }
 
-/* Controles de Video */
+/* Controles de Video - Base */
 .video-controls {
-    background: #2d2d2d;
-    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.75rem;
-    border-top: 2px solid #3d3d3d;
+    gap: 1rem;
+    background: #1a1a1a;
+    padding: 1rem;
+    border-top: 1px solid #333;
     flex-shrink: 0;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 10;
-    box-sizing: border-box;
 }
 
 .control-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    background: #3d3d3d;
+    background: #2d2d2d;
     border: none;
-    padding: 1rem 1.25rem;
+    padding: 1rem 1.5rem;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    color: white;
-    min-width: 75px;
-    position: relative;
+    transition: all 0.2s ease;
+    color: #fff;
+    min-width: 80px;
+}
+
+.control-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.control-label {
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Responsive móvil */
+@media (max-width: 768px) {
+    .video-controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 150;
+        padding: 0.75rem 0.5rem;
+        padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+        gap: 0.5rem;
+        background: #1a1a1a;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .control-btn {
+        flex: 1;
+        min-width: 0;
+        padding: 0.75rem 0.25rem;
+        gap: 0.4rem;
+        border-radius: 10px;
+    }
+    
+    .control-icon {
+        font-size: 20px;
+    }
+    
+    .control-label {
+        font-size: 10px;
+    }
+    
+    .self-video {
+        bottom: 80px !important;
+    }
 }
 
 .control-btn:hover {
@@ -2477,11 +2436,7 @@ main {
         width: calc(100% - 2rem);
         right: 1rem;
         left: 1rem;
-        bottom: calc(130px + env(safe-area-inset-bottom, 0px));
-        max-height: 240px;
-    }
-
-    .video-main-section {
-        padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(150px + env(safe-area-inset-bottom, 0px));
+        max-height: 260px;
     }
 }
