@@ -1026,9 +1026,11 @@ main {
 
     /* Videollamada móvil */
     .video-call-container {
-        height: 100vh;
-        height: 100dvh; /* Altura dinámica del viewport */
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
         padding-bottom: 0;
+        overflow: visible;
     }
 
     .video-header {
@@ -1100,36 +1102,39 @@ main {
     }
 
     .video-controls {
-        padding: 0.8rem 0.3rem 1.2rem;
-        gap: 0.3rem;
+        padding: 12px 8px 20px;
+        gap: 6px;
         background: #2d2d2d;
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
         z-index: 100;
         display: flex;
         justify-content: space-evenly;
         flex-wrap: nowrap;
-        min-height: 75px;
-        margin-top: auto;
         width: 100%;
+        box-sizing: border-box;
     }
 
     .control-btn {
-        padding: 0.6rem 0.25rem;
+        padding: 10px 4px;
         min-width: 60px;
         max-width: 85px;
-        gap: 0.3rem;
+        gap: 4px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .control-icon {
-        font-size: 1.2rem;
+        font-size: 20px;
     }
 
     .control-label {
-        font-size: 0.65rem;
+        font-size: 11px;
+        white-space: nowrap;
     }
 
     /* Chat móvil */
@@ -1424,19 +1429,18 @@ main {
 
     /* Videollamada compacta */
     .video-controls {
-        padding: 0.7rem 0.2rem 1.1rem;
-        gap: 0.25rem;
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
+        padding: 10px 6px 18px;
+        gap: 4px;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
         z-index: 100;
         display: flex;
         justify-content: space-evenly;
         flex-wrap: nowrap;
-        min-height: 70px;
-        margin-top: auto;
         width: 100%;
+        box-sizing: border-box;
     }
 
     .self-video {
@@ -1447,19 +1451,23 @@ main {
     }
 
     .control-btn {
-        padding: 0.55rem 0.2rem;
-        min-width: 55px;
-        max-width: 75px;
-        gap: 0.25rem;
+        padding: 8px 3px;
+        min-width: 50px;
+        max-width: 70px;
+        gap: 3px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .control-icon {
-        font-size: 1.1rem;
+        font-size: 18px;
     }
 
     .control-label {
-        font-size: 0.6rem;
+        font-size: 10px;
+        white-space: nowrap;
     }
 
     .session-info h3 {
