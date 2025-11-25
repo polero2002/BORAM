@@ -1064,7 +1064,7 @@ main {
     .self-video {
         width: 100px;
         height: 75px;
-        bottom: 90px;
+        bottom: calc(130px + env(safe-area-inset-bottom, 0px));
         right: 10px;
         border-width: 2px;
         border-radius: 12px;
@@ -1102,38 +1102,45 @@ main {
     }
 
     .video-controls {
-        padding: 12px 8px 20px;
-        gap: 6px;
-        background: #2d2d2d;
+        padding: 14px 10px;
+        padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+        gap: 10px;
+        background: #202020;
         position: sticky;
         bottom: 0;
         left: 0;
         right: 0;
         z-index: 100;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         flex-wrap: nowrap;
         width: 100%;
         box-sizing: border-box;
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .control-btn {
-        padding: 10px 4px;
-        min-width: 60px;
-        max-width: 85px;
-        gap: 4px;
+        padding: 10px 6px;
+        min-width: 0;
         flex: 1;
+        gap: 6px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        border-radius: 14px;
+        background: #2f2f2f;
     }
 
     .control-icon {
-        font-size: 20px;
+        font-size: 22px;
+        line-height: 1;
     }
 
     .control-label {
-        font-size: 11px;
+        font-size: 12px;
+        line-height: 1;
         white-space: nowrap;
     }
 
@@ -1142,10 +1149,10 @@ main {
         right: 0;
         left: 0;
         width: 100%;
-        bottom: 75px;
+        bottom: calc(140px + env(safe-area-inset-bottom, 0px));
         top: auto;
-        height: calc(70vh - 75px);
-        max-height: calc(100vh - 150px);
+        height: calc(70vh - 140px);
+        max-height: calc(100vh - 220px);
         border-radius: 20px 20px 0 0;
         z-index: 50;
         transform: translateY(100%);
@@ -1429,44 +1436,50 @@ main {
 
     /* Videollamada compacta */
     .video-controls {
-        padding: 10px 6px 18px;
-        gap: 4px;
+        padding: 12px 8px;
+        padding-bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+        gap: 8px;
         position: sticky;
         bottom: 0;
         left: 0;
         right: 0;
         z-index: 100;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         flex-wrap: nowrap;
         width: 100%;
         box-sizing: border-box;
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+        background: #202020;
     }
 
     .self-video {
         width: 90px;
         height: 68px;
-        bottom: 85px;
+        bottom: calc(140px + env(safe-area-inset-bottom, 0px));
         right: 8px;
     }
 
     .control-btn {
-        padding: 8px 3px;
-        min-width: 50px;
-        max-width: 70px;
-        gap: 3px;
+        padding: 9px 4px;
+        min-width: 0;
         flex: 1;
+        gap: 4px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        border-radius: 12px;
+        background: #2f2f2f;
     }
 
     .control-icon {
-        font-size: 18px;
+        font-size: 20px;
+        line-height: 1;
     }
 
     .control-label {
-        font-size: 10px;
+        font-size: 11px;
+        line-height: 1;
         white-space: nowrap;
     }
 
@@ -2448,7 +2461,7 @@ main {
     .self-video {
         width: 150px;
         height: 100px;
-        bottom: 90px;
+        bottom: calc(120px + env(safe-area-inset-bottom, 0px));
         right: 10px;
     }
 
@@ -2464,11 +2477,11 @@ main {
         width: calc(100% - 2rem);
         right: 1rem;
         left: 1rem;
-        bottom: 70px;
-        max-height: 200px;
+        bottom: calc(130px + env(safe-area-inset-bottom, 0px));
+        max-height: 240px;
     }
 
     .video-main-section {
-        padding: 0;
+        padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px));
     }
 }
