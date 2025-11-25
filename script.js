@@ -627,6 +627,9 @@ function joinVideoCall(appointmentIndex) {
 // Inicializar videollamada
 async function initializeVideoCall() {
     try {
+        // Hacer la cámara flotante y arrastrable
+        makeSelfVideoFloating();
+        
         // Solicitar acceso a cámara y micrófono
         const stream = await navigator.mediaDevices.getUserMedia({ 
             video: true, 
@@ -931,4 +934,101 @@ function confirmCancelAppointment() {
 // Ir a la página principal
 function goToHome() {
     showMainView();
+}
+
+// Hacer la cámara flotante y arrastrable
+function makeSelfVideoFloating() {
+    const selfVideo = document.querySelector('.self-video');
+    if (!selfVideo) return;
+    
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+    
+    // Obtener posición inicial desde bottom/right
+    const computedStyle = window.getComputedStyle(selfVideo);
+    const bottom = parseInt(computedStyle.bottom);
+    const right = parseInt(computedStyle.right);
+    
+    // Convertir a coordenadas top/left para facilitar el arrastre
+    const rect = selfVideo.getBoundingClientRect();
+    xOffset = window.innerWidth - rect.right;
+    yOffset = rect.top;
+    
+    selfVideo.addEventListener('touchstart', dragStart, false);
+    selfVideo.addEventListener('touchend', dragEnd, false);
+    selfVideo.addEventListener('touchmove', drag, false);
+    
+    selfVideo.addEventListener('mousedown', dragStart, false);
+    selfVideo.addEventListener('mouseup', dragEnd, false);
+    selfVideo.addEventListener('mousemove', drag, false);
+    
+    function dragStart(e) {
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+        } else {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+        }
+        
+        if (e.target === selfVideo || selfVideo.contains(e.target)) {
+            isDragging = true;
+            selfVideo.style.cursor = 'grabbing';
+            selfVideo.style.transition = 'none';
+        }
+    }
+    
+    function dragEnd(e) {
+        isDragging = false;
+        selfVideo.style.cursor = 'grab';
+        selfVideo.style.transition = 'all 0.3s ease';
+        
+        // Asegurar que no se salga de los límites
+        const rect = selfVideo.getBoundingClientRect();
+        const maxX = window.innerWidth - rect.width - 10;
+        const maxY = window.innerHeight - rect.height - 10;
+        
+        if (currentX < 10) currentX = 10;
+        if (currentX > maxX) currentX = maxX;
+        if (currentY < 10) currentY = 10;
+        if (currentY > maxY) currentY = maxY;
+        
+        setTranslate(currentX, currentY, selfVideo);
+    }
+    
+    function drag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            
+            if (e.type === "touchmove") {
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+            } else {
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+            }
+            
+            xOffset = currentX;
+            yOffset = currentY;
+            
+            setTranslate(currentX, currentY, selfVideo);
+        }
+    }
+    
+    function setTranslate(xPos, yPos, el) {
+        // Cambiar a posición absoluta para poder mover libremente
+        el.style.position = 'fixed';
+        el.style.left = xPos + 'px';
+        el.style.top = yPos + 'px';
+        el.style.right = 'auto';
+        el.style.bottom = 'auto';
+    }
+    
+    // Establecer cursor inicial
+    selfVideo.style.cursor = 'grab';
 }
