@@ -1,0 +1,2276 @@
+/* Reset y Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary-color: #8b5cf6;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+}
+
+/* Navbar */
+.navbar {
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-brand .logo {
+    height: 60px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+.nav-brand .logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3));
+}
+
+.nav-brand .brand-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.nav-brand .brand-name:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: scale(1.05);
+}
+
+.nav-brand h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.nav-brand h1:hover {
+    color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Botones */
+.btn-primary, .btn-secondary, .btn-outline, .btn-danger {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--text-secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: var(--text-primary);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-outline:active {
+    transform: scale(0.98);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.btn-danger:active {
+    transform: scale(0.98);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 1rem;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 8px;
+}
+
+/* Filtros */
+.filters {
+    background: var(--card-bg);
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filters .container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.filter-group select {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Sección Principal */
+main {
+    padding: 3rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Grid de Psicólogos */
+.psychologists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.psychologist-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.psychologist-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.psychologist-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.psychologist-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+}
+
+.psychologist-name {
+    flex: 1;
+}
+
+.psychologist-name h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.psychologist-specialty {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.psychologist-details {
+    margin: 1rem 0;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.psychologist-bio {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 1rem 0;
+    line-height: 1.5;
+}
+
+.psychologist-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.tag {
+    background: #ede9fe;
+    color: var(--secondary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.psychologist-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.price {
+    font-size: 1.5rem;
+    color: var(--success-color);
+    font-weight: 700;
+}
+
+.price-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stars {
+    color: #fbbf24;
+    font-size: 1.2rem;
+}
+
+.rating-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: var(--danger-color);
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+}
+
+.register-link a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Perfil */
+.profile-info {
+    text-align: center;
+}
+
+.profile-avatar {
+    margin-bottom: 1.5rem;
+}
+
+.avatar-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 3rem;
+    color: white;
+    font-weight: 700;
+}
+
+.profile-details {
+    text-align: left;
+    margin: 2rem 0;
+}
+
+.profile-details p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.profile-details strong {
+    color: var(--text-primary);
+}
+
+.profile-info button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Info del psicólogo en modal */
+.psychologist-info-modal {
+    background: linear-gradient(135deg, #f0f9ff, #e0e7ff);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.psychologist-info-modal h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: 4rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo-img {
+    height: 50px;
+    width: auto;
+    filter: brightness(1.2);
+}
+
+.footer-brand-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a5b4fc, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-tagline {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+    color: #cbd5e1;
+}
+
+.footer-copyright {
+    margin: 1rem 0 0.5rem 0;
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+.footer-motto {
+    margin: 0;
+    opacity: 0.7;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    /* Navegación móvil */
+    .navbar {
+        padding: 0.75rem 0;
+    }
+
+    .navbar .container {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .nav-brand {
+        gap: 0.5rem;
+    }
+
+    .nav-brand .logo {
+        height: 45px;
+    }
+
+    .nav-brand .brand-name {
+        font-size: 1.4rem;
+    }
+
+    .nav-menu {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .nav-menu button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        flex: 1;
+        min-width: auto;
+    }
+
+    /* Hero móvil */
+    .hero {
+        padding: 2.5rem 0;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        margin: 0 1rem;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .search-bar input {
+        padding: 0.75rem;
+    }
+
+    .search-bar button {
+        width: 100%;
+    }
+
+    /* Filtros móvil */
+    .filters {
+        padding: 1rem 0;
+    }
+
+    .filters .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .filter-group label {
+        font-size: 0.9rem;
+    }
+
+    .filter-group select {
+        width: 100%;
+    }
+
+    /* Grid de psicólogos móvil */
+    .psychologists-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .psychologist-card {
+        padding: 1.25rem;
+    }
+
+    .psychologist-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    .psychologist-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 1.75rem;
+    }
+
+    .psychologist-name h3 {
+        font-size: 1.2rem;
+    }
+
+    .psychologist-footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .psychologist-footer .price {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .psychologist-footer button {
+        width: 100%;
+    }
+
+    /* Modales móvil */
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+        margin: 1rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .close-modal {
+        font-size: 2rem;
+        top: 0.5rem;
+        right: 0.75rem;
+    }
+
+    /* Perfil móvil */
+    .profile-info {
+        padding: 1rem;
+    }
+
+    .profile-avatar .avatar-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .profile-details p {
+        font-size: 0.95rem;
+        word-break: break-word;
+    }
+
+    .profile-info button {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    /* Formularios móvil */
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 1rem;
+    }
+
+    /* Info de psicólogo en modal */
+    .psychologist-info-modal {
+        padding: 1rem;
+    }
+
+    .psychologist-info-modal h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Footer móvil */
+    .footer {
+        padding: 2rem 0;
+    }
+
+    .footer-logo {
+        gap: 0.75rem;
+    }
+
+    .footer-logo-img {
+        height: 40px;
+    }
+
+    .footer-brand-name {
+        font-size: 1.5rem;
+    }
+
+    .footer-tagline {
+        font-size: 1rem;
+    }
+
+    .footer-copyright,
+    .footer-motto {
+        font-size: 0.85rem;
+        padding: 0 1rem;
+    }
+
+    /* Vista de citas móvil */
+    .appointments-container {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .appointments-header {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .appointments-header h2 {
+        font-size: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .appointments-stats {
+        gap: 0.75rem;
+        padding: 0 0.5rem;
+    }
+
+    .stat-card {
+        padding: 1.25rem 1.5rem;
+        min-width: calc(50% - 0.5rem);
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+
+    .appointments-list {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem 1rem;
+    }
+
+    .appointment-card {
+        width: 100%;
+    }
+
+    .appointment-header {
+        padding: 1.25rem 1rem 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .appointment-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .appointment-info h3 {
+        font-size: 1.05rem;
+    }
+
+    .appointment-specialty {
+        font-size: 0.8rem;
+    }
+
+    .appointment-status {
+        margin: 0 1rem 0.75rem;
+        padding: 0.35rem 0.85rem;
+        font-size: 0.75rem;
+    }
+
+    .appointment-details {
+        padding: 0.75rem 1rem;
+    }
+
+    .appointment-detail-item {
+        padding: 0.45rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .appointment-detail-item span:first-child {
+        font-size: 1.1rem;
+        width: 22px;
+    }
+
+    .appointment-detail-item strong {
+        font-size: 0.8rem;
+        min-width: 50px;
+    }
+
+    .appointment-notes {
+        padding: 0.65rem;
+        font-size: 0.8rem;
+        margin-top: 0.65rem;
+    }
+
+    .appointment-actions {
+        padding: 0.75rem 1rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .appointment-actions button {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-cancel {
+        min-width: 45px;
+        padding: 0.7rem 0.6rem;
+    }
+
+    .empty-appointments {
+        padding: 3rem 1.5rem;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+    }
+
+    .empty-appointments h3 {
+        font-size: 1.5rem;
+    }
+
+    .empty-appointments p {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    /* Modal de confirmación móvil */
+    .confirmation-content {
+        max-width: 95%;
+    }
+
+    .confirmation-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+
+    .confirmation-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .confirmation-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .confirmation-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .confirmation-actions button {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Videollamada móvil */
+    .video-header {
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .session-info {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .session-info h3 {
+        font-size: 1rem;
+    }
+
+    #sessionTimer {
+        font-size: 0.95rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .video-header button {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .video-main-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+
+    .chat-section {
+        max-height: 250px;
+        position: relative;
+    }
+
+    .chat-messages {
+        max-height: 150px;
+    }
+
+    .self-video {
+        width: 120px;
+        height: 90px;
+        bottom: 80px;
+        right: 10px;
+        border-width: 2px;
+    }
+
+    .video-controls {
+        padding: 1rem 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .control-btn {
+        padding: 0.75rem 0.5rem;
+        min-width: 60px;
+    }
+
+    .control-icon {
+        font-size: 1.25rem;
+    }
+
+    .control-label {
+        font-size: 0.7rem;
+    }
+
+    .chat-input-container input {
+        font-size: 0.9rem;
+    }
+
+    .chat-input-container button {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    /* Navegación ultra compacta */
+    .nav-brand .logo {
+        height: 40px;
+    }
+
+    .nav-brand .brand-name {
+        font-size: 1.2rem;
+    }
+
+    .nav-menu button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    /* Hero ultra compacto */
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    /* Botones más pequeños */
+    .btn-primary, .btn-secondary, .btn-outline, .btn-danger {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Tarjetas de psicólogos compactas */
+    .psychologist-card {
+        padding: 1rem;
+    }
+
+    .psychologist-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .psychologist-name h3 {
+        font-size: 1.1rem;
+    }
+
+    .detail-item {
+        font-size: 0.85rem;
+    }
+
+    .tag {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+    }
+
+    /* Modal compacto */
+    .modal-content {
+        padding: 1rem;
+        width: 98%;
+        margin: 0.5rem;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Footer compacto */
+    .footer-logo-img {
+        height: 35px;
+    }
+
+    .footer-brand-name {
+        font-size: 1.3rem;
+    }
+
+    .footer-tagline {
+        font-size: 0.9rem;
+    }
+
+    /* Citas compactas */
+    .appointments-container {
+        padding: 1rem 0.25rem;
+    }
+
+    .appointments-header {
+        gap: 0.75rem;
+    }
+
+    .appointments-header h2 {
+        font-size: 1.3rem;
+        padding: 0 0.25rem;
+    }
+
+    .appointments-stats {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 0.25rem;
+    }
+
+    .stat-card {
+        padding: 1rem 1.25rem;
+        min-width: 100%;
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .appointments-list {
+        padding: 0 0.25rem 1rem;
+    }
+
+    .appointment-card {
+        padding: 0;
+    }
+
+    .appointment-header {
+        padding: 1rem 0.75rem 0.5rem;
+    }
+
+    .appointment-avatar {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .appointment-info h3 {
+        font-size: 0.95rem;
+    }
+
+    .appointment-specialty {
+        font-size: 0.75rem;
+    }
+
+    .appointment-status {
+        margin: 0 0.75rem 0.5rem;
+        padding: 0.3rem 0.7rem;
+        font-size: 0.7rem;
+    }
+
+    .appointment-details {
+        padding: 0.65rem 0.75rem;
+    }
+
+    .appointment-detail-item {
+        padding: 0.4rem;
+        font-size: 0.75rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .appointment-detail-item span:first-child {
+        font-size: 1rem;
+        width: 20px;
+    }
+
+    .appointment-detail-item strong {
+        font-size: 0.75rem;
+        min-width: 45px;
+    }
+
+    .appointment-notes {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .appointment-actions {
+        padding: 0.65rem 0.75rem 0.85rem;
+    }
+
+    .btn-join {
+        font-size: 0.8rem;
+        padding: 0.65rem;
+    }
+
+    .btn-cancel {
+        padding: 0.65rem 0.5rem;
+        min-width: 40px;
+        font-size: 1.1rem;
+    }
+
+    .empty-appointments {
+        padding: 2.5rem 1rem;
+    }
+
+    .empty-icon {
+        font-size: 3.5rem;
+    }
+
+    .empty-appointments h3 {
+        font-size: 1.3rem;
+    }
+
+    .empty-appointments p {
+        font-size: 0.9rem;
+    }
+
+    /* Modal de confirmación compacto */
+    .confirmation-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .confirmation-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .confirmation-content p {
+        font-size: 0.9rem;
+    }
+
+    /* Videollamada compacta */
+    .self-video {
+        width: 100px;
+        height: 75px;
+        bottom: 70px;
+        right: 5px;
+    }
+
+    .control-btn {
+        padding: 0.6rem 0.4rem;
+        min-width: 50px;
+    }
+
+    .control-icon {
+        font-size: 1.1rem;
+    }
+
+    .control-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.psychologists-grid > * {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Modal de Notificaciones */
+.notification-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+.notification-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    animation: notificationPop 0.5s ease;
+}
+
+.notification-icon.success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.notification-icon.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.notification-icon.warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.notification-icon.info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.notification-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.notification-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    white-space: pre-line;
+}
+
+.notification-content button {
+    width: 100%;
+}
+
+@keyframes notificationPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Modal de Confirmación */
+.confirmation-content {
+    text-align: center;
+    max-width: 450px;
+}
+
+.confirmation-icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    animation: notificationPop 0.5s ease;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+}
+
+.confirmation-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.confirmation-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.confirmation-actions button {
+    flex: 1;
+    max-width: 180px;
+}
+
+/* Vistas de Pantalla Completa */
+.full-screen-view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-color);
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.full-screen-view.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-screen-view .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0;
+}
+
+.full-screen-view > .container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Contenedor de Citas */
+.appointments-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.appointments-header {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.appointments-header h2 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 700;
+}
+
+.appointments-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    color: white;
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Lista de Citas */
+.appointments-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .appointments-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .appointments-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .appointments-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.appointment-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.appointment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+}
+
+.appointment-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1rem;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    margin: 0;
+    border-bottom: none;
+}
+
+.appointment-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.3);
+    border: 3px solid white;
+    flex-shrink: 0;
+}
+
+.appointment-info {
+    flex: 1;
+}
+
+.appointment-info h3 {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+
+.appointment-specialty {
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.appointment-specialty::before {
+    content: '🎓';
+    font-size: 0.9rem;
+}
+
+.appointment-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 1.5rem 0.75rem;
+    letter-spacing: 0.3px;
+    text-transform: capitalize;
+}
+
+.status-upcoming {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1e40af;
+    box-shadow: 0 2px 10px rgba(30, 64, 175, 0.15);
+}
+
+.status-today {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    box-shadow: 0 2px 10px rgba(6, 95, 70, 0.15);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(6, 95, 70, 0.15);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(6, 95, 70, 0.3);
+        transform: scale(1.02);
+    }
+}
+
+.appointment-details {
+    padding: 1rem 1.5rem;
+    background: white;
+}
+
+.appointment-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.appointment-detail-item:hover {
+    background: #e0e7ff;
+    transform: translateX(3px);
+}
+
+.appointment-detail-item span:first-child {
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+}
+
+.appointment-detail-item strong {
+    color: var(--text-primary);
+    min-width: 55px;
+    font-size: 0.85rem;
+}
+
+.appointment-notes {
+    background: #fef3c7;
+    border-left: 3px solid #f59e0b;
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    border-radius: 6px;
+    font-style: italic;
+    color: #92400e;
+    font-size: 0.85rem;
+}
+
+.appointment-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1.5rem 1.5rem;
+    background: white;
+}
+
+.btn-join {
+    flex: 1;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(16, 185, 129, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.btn-join:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.btn-join:active {
+    transform: translateY(-1px);
+}
+
+.btn-cancel {
+    padding: 0.75rem;
+    background: white;
+    color: var(--danger-color);
+    border: 2px solid var(--danger-color);
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 45px;
+}
+
+.btn-cancel:hover {
+    background: var(--danger-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.empty-appointments {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 2px dashed var(--border-color);
+}
+
+.empty-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-appointments h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.empty-appointments p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.appointments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.appointments-stats {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Videollamada */
+.video-call-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #1a1a1a;
+}
+
+.video-header {
+    background: #2d2d2d;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #3d3d3d;
+    z-index: 20;
+}
+
+.session-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.session-info h3 {
+    color: white;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+#sessionTimer {
+    background: #ef4444;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.video-main-section {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.video-grid {
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    background: #000;
+    overflow: hidden;
+}
+
+.main-video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.self-video {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 280px;
+    height: 160px;
+    border-radius: 16px;
+    border: 3px solid white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.self-video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    z-index: 1;
+}
+
+.main-video .video-placeholder {
+    font-size: 1.2rem;
+}
+
+.placeholder-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.self-video .placeholder-avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.self-video .video-placeholder p {
+    font-size: 0.9rem;
+}
+
+.video-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+    font-size: 0.95rem;
+}
+
+.self-video .video-label {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.status-indicator {
+    font-size: 0.8rem;
+    animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* Chat */
+.chat-section {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.chat-section.hidden {
+    display: none;
+}
+
+.chat-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.chat-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background: #f8fafc;
+}
+
+.chat-message {
+    margin-bottom: 1rem;
+    animation: messageSlideIn 0.3s ease;
+}
+
+@keyframes messageSlideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.message-sender {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.message-content {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.chat-message.self .message-sender {
+    color: var(--secondary-color);
+    text-align: right;
+}
+
+.chat-message.self .message-content {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    margin-left: auto;
+    max-width: 80%;
+}
+
+.chat-message.self .message-time {
+    text-align: right;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid var(--border-color);
+}
+
+.chat-input-container input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.chat-input-container input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Controles de Video */
+.video-controls {
+    background: #2d2d2d;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    border-top: 2px solid #3d3d3d;
+}
+
+.control-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: #3d3d3d;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.control-btn:hover {
+    background: #4d4d4d;
+    transform: translateY(-2px);
+}
+
+.control-btn.active {
+    background: var(--primary-color);
+}
+
+.control-btn.disabled {
+    background: #ef4444;
+}
+
+.control-icon {
+    font-size: 1.5rem;
+}
+
+.control-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .video-main-section {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-section {
+        max-height: 250px;
+        position: fixed;
+        bottom: 80px;
+        right: 1rem;
+        width: 350px;
+        z-index: 100;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .self-video {
+        width: 200px;
+        height: 120px;
+        bottom: 100px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .session-info {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .session-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .video-controls {
+        flex-wrap: wrap;
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .control-btn {
+        flex: 1;
+        min-width: 70px;
+        padding: 0.75rem 0.5rem;
+    }
+
+    .control-icon {
+        font-size: 1.3rem;
+    }
+
+    .control-label {
+        font-size: 0.75rem;
+    }
+
+    .self-video {
+        width: 150px;
+        height: 100px;
+        bottom: 90px;
+        right: 10px;
+    }
+
+    .appointments-list {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-card {
+        margin: 0 1rem;
+    }
+
+    .chat-section {
+        width: calc(100% - 2rem);
+        right: 1rem;
+        left: 1rem;
+        bottom: 70px;
+        max-height: 200px;
+    }
+
+    .video-main-section {
+        padding: 0;
+    }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#6366f1">
+    <title>BORAM - Consultoría de Psicología Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Ingresar</button>
+                <p class="register-link">¿No tienes cuenta? <a href="#" id="registerLink">Regístrate aquí</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Perfil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Mi Perfil</h2>
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">
+                        <span id="userInitials">U</span>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <p><strong>Nombre:</strong> <span id="userName">Usuario Demo</span></p>
+                    <p><strong>Email:</strong> <span id="userEmail">usuario@demo.com</span></p>
+                    <p><strong>Teléfono:</strong> <span id="userPhone">+52 555 123 4567</span></p>
+                    <p><strong>Fecha de registro:</strong> <span id="userRegDate">25/11/2025</span></p>
+                </div>
+                <button class="btn-secondary" id="editProfileBtn">Editar Perfil</button>
+                <button class="btn-danger" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Agendar Cita -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Agendar Cita</h2>
+            <div id="psychologistInfo" class="psychologist-info-modal"></div>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="appointmentDate">Fecha</label>
+                    <input type="date" id="appointmentDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Hora</label>
+                    <select id="appointmentTime" required>
+                        <option value="">Selecciona una hora</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentNotes">Motivo de consulta (opcional)</label>
+                    <textarea id="appointmentNotes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Confirmar Cita</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Notificaciones -->
+    <div id="notificationModal" class="modal">
+        <div class="modal-content notification-content">
+            <div class="notification-icon" id="notificationIcon"></div>
+            <h2 id="notificationTitle">Notificación</h2>
+            <p id="notificationMessage"></p>
+            <button class="btn-primary" id="notificationBtn">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Cancelación -->
+    <div id="cancelModal" class="modal">
+        <div class="modal-content confirmation-content">
+            <span class="close-modal">&times;</span>
+            <div class="confirmation-icon">
+                <span>⚠️</span>
+            </div>
+            <h2>¿Cancelar Cita?</h2>
+            <p id="cancelMessage">¿Estás seguro que deseas cancelar esta cita?</p>
+            <div class="confirmation-actions">
+                <button class="btn-outline" id="cancelNoBtn">No, Mantener</button>
+                <button class="btn-danger" id="cancelYesBtn">Sí, Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vista de Mis Citas -->
+    <div id="appointmentsView" class="full-screen-view">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="logo.png" alt="BORAM Logo" class="logo" style="cursor: pointer;" onclick="goToHome()">
+                    <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
+                </div>
+                <div class="nav-menu">
+                    <button class="btn-primary" id="newAppointmentBtn">➕ Agendar Nueva Cita</button>
+                    <button class="btn-outline" id="profileBtnAlt">Mi Perfil</button>
+                    <button class="btn-danger" id="logoutBtnAlt">Cerrar Sesión</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container appointments-container">
+            <div class="appointments-header">
+                <h2>Mis Citas Agendadas</h2>
+                <div class="appointments-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalAppointments">1</span>
+                        <span class="stat-label">Total de citas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="upcomingAppointments">1</span>
+                        <span class="stat-label">Próximas</span>
+                    </div>
+                </div>
+            </div>
+            <div id="appointmentsList" class="appointments-list"></div>
+        </div>
+    </div>
+
+    <!-- Vista de Videollamada -->
+    <div id="videoCallView" class="full-screen-view">
+        <div class="video-call-container">
+            <div class="video-header">
+                <div class="session-info">
+                    <h3 id="sessionPsychologist"></h3>
+                    <span id="sessionTimer">00:00</span>
+                </div>
+                <button class="btn-danger" id="endCallBtn">🔴 Finalizar Sesión</button>
+            </div>
+
+            <div class="video-main-section">
+                <div class="video-grid">
+                    <div class="video-container main-video">
+                        <video id="psychologistVideo" autoplay></video>
+                        <div class="video-label">
+                            <span id="psychologistName"></span>
+                            <span class="status-indicator">🟢</span>
+                        </div>
+                        <div class="video-placeholder">
+                            <div class="placeholder-avatar" id="psychologistAvatar"></div>
+                            <p>Esperando conexión del psicólogo...</p>
+                        </div>
+                    </div>
+
+                    <div class="video-container self-video">
+                        <video id="userVideo" autoplay muted></video>
+                        <div class="video-label">
+                            <span>Tú</span>
+                        </div>
+                        <div class="video-placeholder">
+                            <div class="placeholder-avatar" id="userAvatar">U</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-section">
+                    <div class="chat-header">
+                        <h4>💬 Chat de la sesión</h4>
+                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
+                        <button class="btn-primary" id="sendMessageBtn">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-controls">
+                <button class="control-btn" id="toggleMicBtn" title="Micrófono">
+                    <span class="control-icon">🎤</span>
+                    <span class="control-label">Micrófono</span>
+                </button>
+                <button class="control-btn" id="toggleVideoBtn" title="Cámara">
+                    <span class="control-icon">📹</span>
+                    <span class="control-label">Cámara</span>
+                </button>
+                <button class="control-btn" id="toggleChatBtn" title="Chat">
+                    <span class="control-icon">💬</span>
+                    <span class="control-label">Chat</span>
+                </button>
+                <button class="control-btn" id="shareScreenBtn" title="Compartir pantalla">
+                    <span class="control-icon">🖥️</span>
+                    <span class="control-label">Compartir</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="logo.png" alt="BORAM Logo" class="logo" style="cursor: pointer;" onclick="goToHome()">
+                <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
+            </div>
+            <div class="nav-menu">
+                <button class="btn-outline" id="myAppointmentsBtn">📅 Mis Citas</button>
+                <button class="btn-outline" id="profileBtn">Mi Perfil</button>
+                <button class="btn-primary" id="loginBtn">Iniciar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero">
+        <div class="container">
+            <h1>Encuentra al Psicólogo Perfecto para Ti</h1>
+            <p>Profesionales certificados listos para ayudarte en tu bienestar mental</p>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre o especialidad...">
+                <button class="btn-primary" id="searchBtn">🔍 Buscar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros -->
+    <section class="filters">
+        <div class="container">
+            <div class="filter-group">
+                <label>Especialidad:</label>
+                <select id="specialtyFilter">
+                    <option value="">Todas</option>
+                    <option value="Ansiedad">Ansiedad</option>
+                    <option value="Depresión">Depresión</option>
+                    <option value="Parejas">Parejas</option>
+                    <option value="Infantil">Infantil</option>
+                    <option value="Familiar">Familiar</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Disponibilidad:</label>
+                <select id="availabilityFilter">
+                    <option value="">Cualquiera</option>
+                    <option value="inmediata">Inmediata</option>
+                    <option value="esta-semana">Esta semana</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Psicólogos -->
+    <main class="container">
+        <h2 class="section-title">Nuestros Profesionales</h2>
+        <div class="psychologists-grid" id="psychologistsGrid">
+            <!-- Los psicólogos se cargarán dinámicamente con JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="BORAM Logo" class="footer-logo-img">
+                    <span class="footer-brand-name">BORAM</span>
+                </div>
+                <p class="footer-tagline">Consultoría de Psicología Virtual</p>
+                <p class="footer-copyright">&copy; 2025 BORAM. Todos los derechos reservados.</p>
+                <p class="footer-motto">Cuidando tu salud mental, un día a la vez.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
