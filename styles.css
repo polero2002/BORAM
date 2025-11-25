@@ -1026,17 +1026,26 @@ main {
 
     /* Videollamada móvil */
     .video-call-container {
-        height: auto;
-        min-height: 100vh;
-        min-height: 100dvh;
-        padding-bottom: 0;
-        overflow: visible;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
     }
 
     .video-header {
         padding: 0.5rem 0.75rem;
         flex-wrap: wrap;
         min-height: auto;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 30;
     }
 
     .session-info {
@@ -2429,17 +2438,12 @@ main {
 }
 
 @media (max-width: 768px) {
-    .video-call-container {
-        height: 100vh;
-        height: 100dvh;
-        display: flex;
-        flex-direction: column;
-    }
-    
     .video-main-section {
         flex: 1;
         min-height: 0;
         position: relative;
+        overflow: hidden;
+        margin-bottom: 80px;
     }
     
     .video-grid {
