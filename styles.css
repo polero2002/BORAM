@@ -1064,7 +1064,7 @@ main {
     .self-video {
         width: 100px;
         height: 75px;
-        bottom: calc(130px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
         right: 10px;
         border-width: 2px;
         border-radius: 12px;
@@ -1395,7 +1395,7 @@ main {
     .self-video {
         width: 90px;
         height: 68px;
-        bottom: 100px;
+        bottom: 90px !important;
         right: 8px;
     }
 
@@ -2327,10 +2327,6 @@ main {
     
     .control-label {
         font-size: 10px;
-    }
-    
-    .self-video {
-        bottom: 80px !important;
     }
 }
 
