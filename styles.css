@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
 :root {
     --primary-color: #6366f1;
     --primary-dark: #4f46e5;
@@ -27,6 +32,8 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 .container {
@@ -1018,78 +1025,92 @@ main {
     }
 
     /* Videollamada móvil */
+    .video-call-container {
+        height: 100vh;
+        height: 100dvh; /* Altura dinámica del viewport */
+    }
+
     .video-header {
         padding: 0.75rem 1rem;
         flex-wrap: wrap;
     }
 
     .session-info {
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-between;
         width: 100%;
     }
 
     .session-info h3 {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     #sessionTimer {
-        font-size: 0.95rem;
-        padding: 0.4rem 0.75rem;
+        font-size: 0.85rem;
+        padding: 0.35rem 0.7rem;
     }
 
     .video-header #endCallBtn {
         width: 100%;
         margin-top: 0.5rem;
         font-size: 0.9rem;
-        padding: 0.6rem;
+        padding: 0.65rem;
     }
 
     .self-video {
-        width: 140px;
-        height: 105px;
-        bottom: 90px;
+        width: 100px;
+        height: 75px;
+        bottom: 10px;
         right: 10px;
         border-width: 2px;
+        border-radius: 12px;
     }
 
     .video-label {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+        bottom: 0.5rem;
+        left: 0.5rem;
     }
 
     .self-video .video-label {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
     }
 
     .placeholder-avatar {
-        width: 90px;
-        height: 90px;
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        width: 80px;
+        height: 80px;
+        font-size: 2.2rem;
+        margin-bottom: 0.75rem;
     }
 
     .self-video .placeholder-avatar {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-        margin-bottom: 0.3rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+        border-width: 2px;
     }
 
     .self-video .video-placeholder p {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
     }
 
     .video-controls {
-        padding: 1rem 0.5rem;
+        padding: 0.75rem 0.5rem;
         gap: 0.5rem;
+        background: #2d2d2d;
+        position: sticky;
+        bottom: 0;
+        padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
     }
 
     .control-btn {
-        padding: 0.75rem 0.5rem;
-        min-width: 70px;
+        padding: 0.65rem 0.4rem;
+        min-width: 65px;
+        gap: 0.35rem;
     }
 
     .control-icon {
@@ -1097,26 +1118,44 @@ main {
     }
 
     .control-label {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
 
     /* Chat móvil */
     .chat-section {
-        right: -100%;
+        right: 0;
+        left: 0;
         width: 100%;
-        bottom: 75px;
+        bottom: 0;
+        top: auto;
+        height: 70vh;
+        max-height: 70vh;
+        border-radius: 20px 20px 0 0;
     }
 
     .chat-section.visible {
-        right: 0;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
+    }
+
+    .chat-header {
+        cursor: default;
     }
 
     .chat-header {
         padding: 0.75rem 1rem;
+        border-radius: 20px 20px 0 0;
     }
 
     .chat-header h4 {
         font-size: 1rem;
+    }
+
+    .chat-close {
+        width: 28px;
+        height: 28px;
+        font-size: 1.3rem;
     }
 
     .chat-messages {
@@ -1125,6 +1164,7 @@ main {
 
     .chat-input-container {
         padding: 0.75rem;
+        padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
     }
 
     .chat-input-container input {
@@ -1355,24 +1395,40 @@ main {
     }
 
     /* Videollamada compacta */
+    .video-controls {
+        padding: 0.6rem 0.4rem;
+        gap: 0.4rem;
+        padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
+    }
+
     .self-video {
-        width: 100px;
-        height: 75px;
-        bottom: 70px;
-        right: 5px;
+        width: 90px;
+        height: 68px;
+        bottom: 8px;
+        right: 8px;
     }
 
     .control-btn {
-        padding: 0.6rem 0.4rem;
-        min-width: 50px;
+        padding: 0.55rem 0.35rem;
+        min-width: 58px;
+        gap: 0.3rem;
     }
 
     .control-icon {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .control-label {
         font-size: 0.65rem;
+    }
+
+    .session-info h3 {
+        font-size: 0.85rem;
+    }
+
+    #sessionTimer {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
     }
 }
 
@@ -2081,23 +2137,31 @@ main {
     }
 }
 
-/* Chat */
+/* Chat Flotante */
 .chat-section {
     position: fixed;
-    right: -400px;
-    top: 0;
-    bottom: 80px;
-    width: 380px;
+    right: 20px;
+    top: 80px;
+    width: 350px;
+    height: 500px;
+    max-height: calc(100vh - 180px);
     background: white;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     z-index: 25;
     display: flex;
     flex-direction: column;
-    transition: right 0.3s ease;
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .chat-section.visible {
-    right: 0;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
 }
 
 .chat-header {
@@ -2108,6 +2172,8 @@ main {
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+    cursor: move;
+    user-select: none;
 }
 
 .chat-header h4 {
@@ -2219,14 +2285,16 @@ main {
 /* Controles de Video */
 .video-controls {
     background: #2d2d2d;
-    padding: 1.5rem;
+    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     border-top: 2px solid #3d3d3d;
     flex-shrink: 0;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
 }
 
 .control-btn {
@@ -2236,12 +2304,12 @@ main {
     gap: 0.5rem;
     background: #3d3d3d;
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.25rem;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     color: white;
-    min-width: 80px;
+    min-width: 75px;
     position: relative;
 }
 
@@ -2259,12 +2327,13 @@ main {
 }
 
 .control-icon {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .control-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .chat-badge {

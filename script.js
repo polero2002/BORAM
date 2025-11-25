@@ -743,6 +743,67 @@ function toggleChat() {
     
     chatSection.classList.toggle('visible', chatVisible);
     btn.classList.toggle('active', chatVisible);
+    
+    // Inicializar drag cuando se abre el chat por primera vez
+    if (chatVisible && !chatSection.dataset.dragInitialized) {
+        initChatDrag();
+        chatSection.dataset.dragInitialized = 'true';
+    }
+}
+
+// Hacer el chat arrastrable
+function initChatDrag() {
+    const chatSection = document.getElementById('chatSection');
+    const chatHeader = chatSection.querySelector('.chat-header');
+    
+    // Solo en desktop
+    if (window.innerWidth <= 768) return;
+    
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    chatHeader.addEventListener('mousedown', dragStart);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', dragEnd);
+
+    function dragStart(e) {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+
+        if (e.target === chatHeader || chatHeader.contains(e.target)) {
+            if (e.target.tagName !== 'BUTTON') {
+                isDragging = true;
+            }
+        }
+    }
+
+    function drag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+
+            xOffset = currentX;
+            yOffset = currentY;
+
+            setTranslate(currentX, currentY, chatSection);
+        }
+    }
+
+    function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+        isDragging = false;
+    }
+
+    function setTranslate(xPos, yPos, el) {
+        el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    }
 }
 
 function shareScreen() {
