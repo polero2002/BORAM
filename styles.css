@@ -1028,6 +1028,7 @@ main {
     .video-call-container {
         height: 100vh;
         height: 100dvh; /* Altura dinámica del viewport */
+        padding-bottom: 0;
     }
 
     .video-header {
@@ -1061,7 +1062,7 @@ main {
     .self-video {
         width: 100px;
         height: 75px;
-        bottom: 85px;
+        bottom: 90px;
         right: 10px;
         border-width: 2px;
         border-radius: 12px;
@@ -1099,19 +1100,20 @@ main {
     }
 
     .video-controls {
-        padding: 0.8rem 0.3rem;
+        padding: 0.8rem 0.3rem 1.2rem;
         gap: 0.3rem;
         background: #2d2d2d;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
         z-index: 100;
-        padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
         display: flex;
         justify-content: space-evenly;
         flex-wrap: nowrap;
-        min-height: 70px;
+        min-height: 75px;
+        margin-top: auto;
+        width: 100%;
     }
 
     .control-btn {
@@ -1135,9 +1137,9 @@ main {
         right: 0;
         left: 0;
         width: 100%;
-        bottom: 70px;
+        bottom: 75px;
         top: auto;
-        height: calc(70vh - 70px);
+        height: calc(70vh - 75px);
         max-height: calc(100vh - 150px);
         border-radius: 20px 20px 0 0;
         z-index: 50;
@@ -1422,24 +1424,25 @@ main {
 
     /* Videollamada compacta */
     .video-controls {
-        padding: 0.7rem 0.2rem;
+        padding: 0.7rem 0.2rem 1.1rem;
         gap: 0.25rem;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
         z-index: 100;
-        padding-bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px));
         display: flex;
         justify-content: space-evenly;
         flex-wrap: nowrap;
-        min-height: 65px;
+        min-height: 70px;
+        margin-top: auto;
+        width: 100%;
     }
 
     .self-video {
         width: 90px;
         height: 68px;
-        bottom: 75px;
+        bottom: 85px;
         right: 8px;
     }
 
@@ -2332,6 +2335,7 @@ main {
     flex-wrap: wrap;
     position: relative;
     z-index: 10;
+    box-sizing: border-box;
 }
 
 .control-btn {
