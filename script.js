@@ -747,11 +747,12 @@ function toggleChat() {
     // Inicializar drag cuando se abre el chat por primera vez
     if (chatVisible && !chatSection.dataset.dragInitialized) {
         initChatDrag();
+        initChatSwipe();
         chatSection.dataset.dragInitialized = 'true';
     }
 }
 
-// Hacer el chat arrastrable
+// Hacer el chat arrastrable (solo desktop)
 function initChatDrag() {
     const chatSection = document.getElementById('chatSection');
     const chatHeader = chatSection.querySelector('.chat-header');
@@ -803,6 +804,58 @@ function initChatDrag() {
 
     function setTranslate(xPos, yPos, el) {
         el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    }
+}
+
+// Cerrar chat deslizando hacia abajo (solo móvil)
+function initChatSwipe() {
+    const chatSection = document.getElementById('chatSection');
+    const chatHeader = chatSection.querySelector('.chat-header');
+    
+    // Solo en móvil
+    if (window.innerWidth > 768) return;
+    
+    let touchStartY = 0;
+    let touchCurrentY = 0;
+    let isDragging = false;
+
+    chatHeader.addEventListener('touchstart', handleTouchStart, { passive: true });
+    chatHeader.addEventListener('touchmove', handleTouchMove, { passive: false });
+    chatHeader.addEventListener('touchend', handleTouchEnd);
+
+    function handleTouchStart(e) {
+        touchStartY = e.touches[0].clientY;
+        isDragging = true;
+    }
+
+    function handleTouchMove(e) {
+        if (!isDragging) return;
+        
+        touchCurrentY = e.touches[0].clientY;
+        const deltaY = touchCurrentY - touchStartY;
+        
+        // Solo permitir deslizar hacia abajo
+        if (deltaY > 0) {
+            e.preventDefault();
+            chatSection.style.transform = `translateY(${deltaY}px)`;
+        }
+    }
+
+    function handleTouchEnd(e) {
+        if (!isDragging) return;
+        
+        const deltaY = touchCurrentY - touchStartY;
+        
+        // Si deslizó más de 100px hacia abajo, cerrar el chat
+        if (deltaY > 100) {
+            toggleChat();
+        }
+        
+        // Resetear la posición
+        chatSection.style.transform = '';
+        isDragging = false;
+        touchStartY = 0;
+        touchCurrentY = 0;
     }
 }
 
