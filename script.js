@@ -91,7 +91,7 @@ let sessionTimer = null;
 let sessionStartTime = null;
 let micEnabled = true;
 let videoEnabled = true;
-let chatVisible = true;
+let chatVisible = false;
 
 // Referencias DOM
 const loginModal = document.getElementById('loginModal');
@@ -199,6 +199,7 @@ function setupEventListeners() {
     document.getElementById('toggleMicBtn').addEventListener('click', toggleMicrophone);
     document.getElementById('toggleVideoBtn').addEventListener('click', toggleVideo);
     document.getElementById('toggleChatBtn').addEventListener('click', toggleChat);
+    document.getElementById('closeChatBtn').addEventListener('click', toggleChat);
     document.getElementById('shareScreenBtn').addEventListener('click', shareScreen);
     document.getElementById('sendMessageBtn').addEventListener('click', sendChatMessage);
     document.getElementById('chatInput').addEventListener('keypress', (e) => {
@@ -737,10 +738,10 @@ function toggleVideo() {
 
 function toggleChat() {
     chatVisible = !chatVisible;
-    const chatSection = document.querySelector('.chat-section');
+    const chatSection = document.getElementById('chatSection');
     const btn = document.getElementById('toggleChatBtn');
     
-    chatSection.classList.toggle('hidden', !chatVisible);
+    chatSection.classList.toggle('visible', chatVisible);
     btn.classList.toggle('active', chatVisible);
 }
 

@@ -1020,15 +1020,14 @@ main {
     /* Videollamada móvil */
     .video-header {
         padding: 0.75rem 1rem;
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: stretch;
+        flex-wrap: wrap;
     }
 
     .session-info {
         flex-direction: column;
         gap: 0.5rem;
         text-align: center;
+        width: 100%;
     }
 
     .session-info h3 {
@@ -1040,31 +1039,47 @@ main {
         padding: 0.4rem 0.75rem;
     }
 
-    .video-header button {
+    .video-header #endCallBtn {
         width: 100%;
+        margin-top: 0.5rem;
         font-size: 0.9rem;
-    }
-
-    .video-main-section {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr auto;
-    }
-
-    .chat-section {
-        max-height: 250px;
-        position: relative;
-    }
-
-    .chat-messages {
-        max-height: 150px;
+        padding: 0.6rem;
     }
 
     .self-video {
-        width: 120px;
-        height: 90px;
-        bottom: 80px;
+        width: 140px;
+        height: 105px;
+        bottom: 90px;
         right: 10px;
         border-width: 2px;
+    }
+
+    .video-label {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .self-video .video-label {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .placeholder-avatar {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .self-video .placeholder-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .self-video .video-placeholder p {
+        font-size: 0.75rem;
     }
 
     .video-controls {
@@ -1074,23 +1089,51 @@ main {
 
     .control-btn {
         padding: 0.75rem 0.5rem;
-        min-width: 60px;
+        min-width: 70px;
     }
 
     .control-icon {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
     .control-label {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+    }
+
+    /* Chat móvil */
+    .chat-section {
+        right: -100%;
+        width: 100%;
+        bottom: 75px;
+    }
+
+    .chat-section.visible {
+        right: 0;
+    }
+
+    .chat-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .chat-header h4 {
+        font-size: 1rem;
+    }
+
+    .chat-messages {
+        padding: 0.75rem;
+    }
+
+    .chat-input-container {
+        padding: 0.75rem;
     }
 
     .chat-input-container input {
         font-size: 0.9rem;
+        padding: 0.65rem;
     }
 
     .chat-input-container button {
-        padding: 0.6rem 1rem;
+        padding: 0.65rem 1rem;
         font-size: 0.85rem;
     }
 }
@@ -1866,6 +1909,7 @@ main {
     display: flex;
     flex-direction: column;
     background: #1a1a1a;
+    position: relative;
 }
 
 .video-header {
@@ -1876,6 +1920,7 @@ main {
     align-items: center;
     border-bottom: 2px solid #3d3d3d;
     z-index: 20;
+    flex-shrink: 0;
 }
 
 .session-info {
@@ -1901,14 +1946,14 @@ main {
 
 .video-main-section {
     flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 0;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .video-grid {
+    flex: 1;
     position: relative;
     background: #000;
     overflow: hidden;
@@ -2038,27 +2083,57 @@ main {
 
 /* Chat */
 .chat-section {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    bottom: 80px;
+    width: 380px;
+    background: white;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 25;
     display: flex;
     flex-direction: column;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
+    transition: right 0.3s ease;
 }
 
-.chat-section.hidden {
-    display: none;
+.chat-section.visible {
+    right: 0;
 }
 
 .chat-header {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 1rem;
-    text-align: center;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .chat-header h4 {
     margin: 0;
     font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.chat-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.chat-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
 }
 
 .chat-messages {
@@ -2147,8 +2222,11 @@ main {
     padding: 1.5rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
     border-top: 2px solid #3d3d3d;
+    flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
 .control-btn {
@@ -2163,6 +2241,8 @@ main {
     cursor: pointer;
     transition: all 0.3s ease;
     color: white;
+    min-width: 80px;
+    position: relative;
 }
 
 .control-btn:hover {
@@ -2185,6 +2265,22 @@ main {
 .control-label {
     font-size: 0.85rem;
     font-weight: 600;
+}
+
+.chat-badge {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: #ef4444;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
 }
 
 /* Responsive */
