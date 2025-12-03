@@ -1383,3 +1383,34 @@ function makeSelfVideoFloating() {
     // Establecer cursor inicial
     selfVideo.style.cursor = 'grab';
 }
+
+// ========================================
+// MENÚ MÓVIL HAMBURGUESA
+// ========================================
+
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navMenu = document.getElementById('navMenu');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en cualquier botón
+    const navButtons = navMenu.querySelectorAll('button');
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
+}
