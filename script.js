@@ -1413,4 +1413,15 @@ if (mobileMenuToggle) {
             navMenu.classList.remove('active');
         }
     });
+
+    // Cerrar menú al hacer scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (Math.abs(scrollTop - lastScrollTop) > 5) {
+            mobileMenuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+        lastScrollTop = scrollTop;
+    }, { passive: true });
 }
