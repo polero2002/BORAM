@@ -490,6 +490,10 @@ function showMainView() {
     appointmentsView.classList.remove('active');
     videoCallView.classList.remove('active');
     
+    // Ocultar vista del test psicológico
+    const psychTestView = document.getElementById('psychTestView');
+    if (psychTestView) psychTestView.classList.remove('active');
+    
     const mainNav = document.querySelector('body > nav');
     const hero = document.querySelector('.hero');
     const filters = document.querySelector('.filters');
@@ -934,6 +938,353 @@ function confirmCancelAppointment() {
 // Ir a la página principal
 function goToHome() {
     showMainView();
+}
+
+// ========================================
+// FUNCIONALIDAD DE TEST PSICOLÓGICO
+// ========================================
+
+// Referencias globales para el test
+const psychTestView = document.getElementById('psychTestView');
+const psychTestForm = document.getElementById('psychTestForm');
+const testSections = document.querySelectorAll('.test-section');
+const prevSectionBtn = document.getElementById('prevSectionBtn');
+const nextSectionBtn = document.getElementById('nextSectionBtn');
+const submitTestBtn = document.getElementById('submitTestBtn');
+const testResults = document.getElementById('testResults');
+const testProgress = document.getElementById('testProgress');
+const progressText = document.getElementById('progressText');
+const recommendedPsychologists = document.getElementById('recommendedPsychologists');
+
+let currentSection = 0;
+const totalSections = testSections.length;
+
+// Navegar al test psicológico
+document.getElementById('psychTestBtn')?.addEventListener('click', showPsychTest);
+
+function showPsychTest() {
+    // Ocultar otras vistas
+    const mainView = document.querySelector('.main-view') || document.body.querySelector('main');
+    const appointmentsView = document.getElementById('appointmentsView');
+    const videoCallContainer = document.getElementById('videoCallContainer');
+    
+    if (mainView) mainView.style.display = 'none';
+    if (appointmentsView) appointmentsView.classList.remove('active');
+    if (videoCallContainer) videoCallContainer.classList.remove('active');
+    
+    // Mostrar vista del test
+    psychTestView.classList.add('active');
+    
+    // Resetear el test
+    resetTest();
+}
+
+function resetTest() {
+    currentSection = 0;
+    psychTestForm.reset();
+    testResults.classList.add('hidden');
+    psychTestForm.style.display = 'block';
+    
+    // Mostrar primera sección
+    testSections.forEach((section, index) => {
+        if (index === 0) {
+            section.classList.remove('hidden');
+        } else {
+            section.classList.add('hidden');
+        }
+    });
+    
+    updateNavigation();
+    updateProgress();
+}
+
+function updateNavigation() {
+    // Botón Anterior
+    if (currentSection === 0) {
+        prevSectionBtn.style.display = 'none';
+    } else {
+        prevSectionBtn.style.display = 'block';
+    }
+    
+    // Botón Siguiente / Submit
+    if (currentSection === totalSections - 1) {
+        nextSectionBtn.style.display = 'none';
+        submitTestBtn.style.display = 'block';
+    } else {
+        nextSectionBtn.style.display = 'block';
+        submitTestBtn.style.display = 'none';
+    }
+}
+
+function updateProgress() {
+    const totalQuestions = 16;
+    const questionsPerSection = [4, 3, 3, 3, 3]; // A, B, C, D, E
+    
+    let completedQuestions = 0;
+    for (let i = 0; i < currentSection; i++) {
+        completedQuestions += questionsPerSection[i];
+    }
+    
+    // Si estamos en la última sección, mostrar el total
+    const currentQuestion = currentSection === totalSections - 1 ? totalQuestions : completedQuestions + 1;
+    const percentage = currentSection === totalSections - 1 ? 100 : (completedQuestions / totalQuestions) * 100;
+    
+    testProgress.style.width = percentage + '%';
+    progressText.textContent = `Pregunta ${currentQuestion} de ${totalQuestions}`;
+}
+
+// Validar sección actual
+function validateCurrentSection() {
+    const currentSectionEl = testSections[currentSection];
+    const inputs = currentSectionEl.querySelectorAll('input[required], select[required]');
+    
+    let isValid = true;
+    inputs.forEach(input => {
+        if (input.type === 'radio') {
+            const radioGroup = currentSectionEl.querySelectorAll(`input[name="${input.name}"]`);
+            const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+            if (!isChecked) isValid = false;
+        } else {
+            if (!input.value) isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+// Navegación entre secciones
+prevSectionBtn?.addEventListener('click', () => {
+    if (currentSection > 0) {
+        testSections[currentSection].classList.add('hidden');
+        currentSection--;
+        testSections[currentSection].classList.remove('hidden');
+        updateNavigation();
+        updateProgress();
+        window.scrollTo(0, 0);
+    }
+});
+
+nextSectionBtn?.addEventListener('click', () => {
+    if (!validateCurrentSection()) {
+        alert('Por favor completa todos los campos requeridos antes de continuar.');
+        return;
+    }
+    
+    if (currentSection < totalSections - 1) {
+        testSections[currentSection].classList.add('hidden');
+        currentSection++;
+        testSections[currentSection].classList.remove('hidden');
+        updateNavigation();
+        updateProgress();
+        window.scrollTo(0, 0);
+    }
+});
+
+// Enviar test
+psychTestForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    if (!validateCurrentSection()) {
+        alert('Por favor completa todos los campos requeridos.');
+        return;
+    }
+    
+    // Recopilar respuestas
+    const formData = new FormData(psychTestForm);
+    const answers = {
+        age: document.getElementById('testAge').value,
+        gender: document.getElementById('testGender').value,
+        occupation: document.getElementById('testOccupation').value,
+        schedule: document.getElementById('testSchedule').value,
+        reason: document.getElementById('testReason').value,
+        duration: document.getElementById('testDuration').value,
+        impact: document.getElementById('testImpact').value,
+        sadness: formData.get('testSadness'),
+        anxiety: formData.get('testAnxiety'),
+        physical: formData.get('testPhysical'),
+        prevTherapy: formData.get('testPrevTherapy'),
+        medication: formData.get('testMedication'),
+        diagnosis: formData.get('testDiagnosis'),
+        genderPref: document.getElementById('testGenderPref').value,
+        approach: document.getElementById('testApproach').value,
+        sessionType: document.getElementById('testSessionType').value
+    };
+    
+    // Analizar y recomendar
+    const recommendations = analyzeAnswers(answers);
+    showRecommendations(recommendations);
+});
+
+function analyzeAnswers(answers) {
+    // Sistema de puntuación para cada psicólogo
+    const scores = psychologists.map(psych => ({
+        psychologist: psych,
+        score: 0,
+        reasons: []
+    }));
+    
+    // Análisis del motivo principal
+    const reasonMap = {
+        'ansiedad': ['Ansiedad', 'Estrés', 'TCC'],
+        'depresion': ['Depresión', 'Bienestar Emocional'],
+        'pareja': ['Terapia de Pareja', 'Relaciones'],
+        'familiar': ['Terapia Familiar', 'Familia'],
+        'duelo': ['Duelo', 'Pérdida'],
+        'autoestima': ['Autoestima', 'Desarrollo Personal'],
+        'trauma': ['Trauma', 'EMDR']
+    };
+    
+    const keywords = reasonMap[answers.reason] || [];
+    scores.forEach(item => {
+        keywords.forEach(keyword => {
+            if (item.psychologist.specialty.includes(keyword) || 
+                item.psychologist.tags.some(tag => tag.includes(keyword))) {
+                item.score += 3;
+                item.reasons.push(`Especialista en ${keyword}`);
+            }
+        });
+    });
+    
+    // Análisis de síntomas (ansiedad/depresión)
+    if (answers.anxiety === 'si') {
+        scores.forEach(item => {
+            if (item.psychologist.tags.includes('Ansiedad') || 
+                item.psychologist.specialty.includes('Ansiedad')) {
+                item.score += 2;
+                item.reasons.push('Experiencia en manejo de ansiedad');
+            }
+        });
+    }
+    
+    if (answers.sadness === 'si') {
+        scores.forEach(item => {
+            if (item.psychologist.tags.includes('Depresión') || 
+                item.psychologist.specialty.includes('Depresión')) {
+                item.score += 2;
+                item.reasons.push('Experiencia en depresión');
+            }
+        });
+    }
+    
+    // Análisis de experiencia previa en terapia
+    if (answers.prevTherapy === 'si') {
+        scores.forEach(item => {
+            if (item.psychologist.experience >= 10) {
+                item.score += 1;
+                item.reasons.push('Alta experiencia profesional');
+            }
+        });
+    } else {
+        // Primera vez en terapia - buscar psicólogos con enfoque humanista
+        scores.forEach(item => {
+            if (item.psychologist.specialty.includes('Humanista')) {
+                item.score += 2;
+                item.reasons.push('Excelente para primera vez en terapia');
+            }
+        });
+    }
+    
+    // Análisis de enfoque preferido
+    if (answers.approach !== 'no-sabe') {
+        const approachMap = {
+            'cognitivo-conductual': 'TCC',
+            'humanista': 'Humanista',
+            'sistemico': 'Familiar'
+        };
+        const preferredApproach = approachMap[answers.approach];
+        
+        scores.forEach(item => {
+            if (item.psychologist.specialty.includes(preferredApproach)) {
+                item.score += 2;
+                item.reasons.push(`Enfoque ${preferredApproach}`);
+            }
+        });
+    }
+    
+    // Análisis de disponibilidad horaria
+    scores.forEach(item => {
+        if (item.psychologist.availability && item.psychologist.availability.length > 0) {
+            item.score += 1;
+            item.reasons.push('Disponibilidad inmediata');
+        }
+    });
+    
+    // Ordenar por puntuación
+    scores.sort((a, b) => b.score - a.score);
+    
+    // Retornar top 3
+    return scores.slice(0, 3).filter(item => item.score > 0);
+}
+
+function showRecommendations(recommendations) {
+    // Ocultar formulario
+    psychTestForm.style.display = 'none';
+    
+    // Mostrar resultados
+    testResults.classList.remove('hidden');
+    
+    // Limpiar resultados previos
+    recommendedPsychologists.innerHTML = '';
+    
+    if (recommendations.length === 0) {
+        recommendedPsychologists.innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+                <p>No pudimos encontrar una coincidencia perfecta basada en tus respuestas.</p>
+                <p>Te recomendamos explorar nuestro catálogo completo de psicólogos.</p>
+                <button class="btn-primary" onclick="goToHome()" style="margin-top: 1rem;">
+                    Ver todos los psicólogos
+                </button>
+            </div>
+        `;
+        return;
+    }
+    
+    recommendations.forEach((item, index) => {
+        const psych = item.psychologist;
+        const reasons = item.reasons.slice(0, 3).join(' • ');
+        const badge = index === 0 ? '<div class="best-match-badge">🏆 Mejor Coincidencia</div>' : '';
+        
+        // Obtener iniciales del nombre
+        const nameParts = psych.name.split(' ');
+        const initials = nameParts.length >= 2 
+            ? nameParts[0][0] + nameParts[nameParts.length - 1][0] 
+            : nameParts[0].substring(0, 2);
+        
+        const card = document.createElement('div');
+        card.className = 'psychologist-card';
+        card.innerHTML = `
+            ${badge}
+            <div class="psychologist-avatar">${initials}</div>
+            <div class="psychologist-info">
+                <h3 class="psychologist-name">${psych.name}</h3>
+                <p class="psychologist-specialty">${psych.specialty}</p>
+                <div class="psychologist-rating">
+                    <span class="stars">${'⭐'.repeat(Math.floor(psych.rating))}${'☆'.repeat(5 - Math.floor(psych.rating))}</span>
+                    <span class="rating-number">${psych.rating} (${psych.reviews} reseñas)</span>
+                </div>
+                <p class="psychologist-experience">${psych.experience} años de experiencia</p>
+                <p class="psychologist-price">$${psych.price}/sesión</p>
+                
+                <div class="recommendation-reasons">
+                    <strong>¿Por qué este psicólogo?</strong>
+                    <p>${reasons}</p>
+                </div>
+                
+                <div class="psychologist-tags">
+                    ${psych.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                
+                <button class="btn-primary" onclick="openAppointmentModal(${psych.id})" style="width: 100%; margin-top: 1rem;">
+                    📅 Agendar Cita
+                </button>
+            </div>
+        `;
+        
+        recommendedPsychologists.appendChild(card);
+    });
+    
+    // Scroll a resultados
+    testResults.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Hacer la cámara flotante y arrastrable

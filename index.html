@@ -111,6 +111,272 @@
         </div>
     </div>
 
+    <!-- Vista de Test Psicológico -->
+    <div id="psychTestView" class="full-screen-view">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="logo.png" alt="BORAM Logo" class="logo" style="cursor: pointer;" onclick="goToHome()">
+                    <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
+                </div>
+                <div class="nav-menu">
+                    <button class="btn-outline" onclick="goToHome()">← Volver</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="test-container">
+                <div class="test-header">
+                    <h1>🧠 Test de Orientación</h1>
+                    <p>Responde estas preguntas para encontrar al psicólogo más adecuado para ti</p>
+                    <div class="test-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="testProgress"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">Pregunta 1 de 16</span>
+                    </div>
+                </div>
+
+                <form id="psychTestForm" class="test-form">
+                    <!-- Sección A: Datos generales -->
+                    <div class="test-section" data-section="A">
+                        <h2>📋 A. Datos Generales</h2>
+                        
+                        <div class="form-group">
+                            <label for="testAge">1. ¿Edad?</label>
+                            <input type="number" id="testAge" min="18" max="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testGender">2. ¿Identidad de género? (opcional)</label>
+                            <select id="testGender">
+                                <option value="">Prefiero no decir</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="no-binario">No binario</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testOccupation">3. ¿Ocupación?</label>
+                            <input type="text" id="testOccupation" placeholder="Ej: Estudiante, Profesionista, etc." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testSchedule">4. ¿Horario disponible para consultas?</label>
+                            <select id="testSchedule" required>
+                                <option value="">Selecciona un horario</option>
+                                <option value="mañana">Mañanas (9:00 AM - 12:00 PM)</option>
+                                <option value="tarde">Tardes (2:00 PM - 5:00 PM)</option>
+                                <option value="flexible">Horario flexible</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Sección B: Motivo de consulta -->
+                    <div class="test-section hidden" data-section="B">
+                        <h2>💭 B. Motivo de Consulta</h2>
+                        
+                        <div class="form-group">
+                            <label for="testReason">5. ¿Cuál es el principal motivo por el que buscas terapia?</label>
+                            <select id="testReason" required>
+                                <option value="">Selecciona un motivo</option>
+                                <option value="ansiedad">Ansiedad y estrés</option>
+                                <option value="depresion">Depresión o tristeza</option>
+                                <option value="pareja">Problemas de pareja</option>
+                                <option value="familiar">Conflictos familiares</option>
+                                <option value="duelo">Duelo o pérdida</option>
+                                <option value="autoestima">Autoestima</option>
+                                <option value="trauma">Trauma o experiencia difícil</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testDuration">6. ¿Desde cuándo experimentas este problema?</label>
+                            <select id="testDuration" required>
+                                <option value="">Selecciona un periodo</option>
+                                <option value="reciente">Menos de 1 mes</option>
+                                <option value="moderado">1-6 meses</option>
+                                <option value="prolongado">Más de 6 meses</option>
+                                <option value="cronico">Más de 1 año</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testImpact">7. ¿Qué impacto tiene actualmente en tu vida?</label>
+                            <select id="testImpact" required>
+                                <option value="">Selecciona el nivel de impacto</option>
+                                <option value="leve">Leve - Puedo funcionar normalmente</option>
+                                <option value="moderado">Moderado - Afecta algunas áreas de mi vida</option>
+                                <option value="severo">Severo - Afecta significativamente mi día a día</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Sección C: Síntomas y estado emocional -->
+                    <div class="test-section hidden" data-section="C">
+                        <h2>😔 C. Síntomas y Estado Emocional</h2>
+                        
+                        <div class="form-group">
+                            <label>8. En las últimas dos semanas, ¿has sentido tristeza o desánimo casi todos los días?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="testSadness" value="si" required>
+                                    <span>Sí</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testSadness" value="a-veces">
+                                    <span>A veces</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testSadness" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>9. ¿Sufres ansiedad, preocupaciones constantes o ataques de pánico?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="testAnxiety" value="si" required>
+                                    <span>Sí, frecuentemente</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testAnxiety" value="a-veces">
+                                    <span>A veces</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testAnxiety" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>10. ¿Has tenido dificultades para dormir, cambios de apetito o irritabilidad?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="testPhysical" value="si" required>
+                                    <span>Sí, varios síntomas</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testPhysical" value="algunos">
+                                    <span>Algunos síntomas</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testPhysical" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección D: Historial psicológico -->
+                    <div class="test-section hidden" data-section="D">
+                        <h2>📖 D. Historial Psicológico</h2>
+                        
+                        <div class="form-group">
+                            <label>11. ¿Has asistido previamente a terapia?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="testPrevTherapy" value="si" required>
+                                    <span>Sí</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testPrevTherapy" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>12. ¿Tomas algún medicamento relacionado con tu salud mental?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="testMedication" value="si" required>
+                                    <span>Sí</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testMedication" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>13. ¿Has sido diagnosticado con algún trastorno psicológico o psiquiátrico?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="testDiagnosis" value="si" required>
+                                    <span>Sí</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="testDiagnosis" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección E: Preferencias de atención -->
+                    <div class="test-section hidden" data-section="E">
+                        <h2>⚙️ E. Preferencias de Atención</h2>
+                        
+                        <div class="form-group">
+                            <label for="testGenderPref">14. ¿Prefieres un psicólogo hombre, mujer o sin preferencia?</label>
+                            <select id="testGenderPref" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="sin-preferencia">Sin preferencia</option>
+                                <option value="hombre">Hombre</option>
+                                <option value="mujer">Mujer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testApproach">15. ¿Qué tipo de enfoque te interesa?</label>
+                            <select id="testApproach" required>
+                                <option value="">Selecciona un enfoque</option>
+                                <option value="cognitivo-conductual">Cognitivo-Conductual (TCC)</option>
+                                <option value="humanista">Humanista</option>
+                                <option value="sistemico">Sistémico/Familiar</option>
+                                <option value="no-sabe">No sé / El psicólogo decide</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testSessionType">16. ¿Prefieres sesiones breves, de profundidad o mixtas?</label>
+                            <select id="testSessionType" required>
+                                <option value="">Selecciona un tipo</option>
+                                <option value="breves">Breves y enfocadas (30-40 min)</option>
+                                <option value="profundidad">De profundidad (50-60 min)</option>
+                                <option value="mixtas">Mixtas / Adaptables</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="test-navigation">
+                        <button type="button" class="btn-secondary" id="prevSectionBtn" style="display: none;">← Anterior</button>
+                        <button type="button" class="btn-primary" id="nextSectionBtn">Siguiente →</button>
+                        <button type="submit" class="btn-primary" id="submitTestBtn" style="display: none;">Ver Resultados 🎯</button>
+                    </div>
+                </form>
+
+                <!-- Resultados del Test -->
+                <div id="testResults" class="test-results hidden">
+                    <div class="results-header">
+                        <h2>🎯 Tus Resultados</h2>
+                        <p>Basándonos en tus respuestas, estos son los psicólogos más recomendados para ti:</p>
+                    </div>
+                    <div id="recommendedPsychologists" class="psychologists-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Vista de Mis Citas -->
     <div id="appointmentsView" class="full-screen-view">
         <nav class="navbar">
@@ -224,6 +490,7 @@
                 <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
             </div>
             <div class="nav-menu">
+                <button class="btn-outline" id="psychTestBtn">🧠 Test de Orientación</button>
                 <button class="btn-outline" id="myAppointmentsBtn">📅 Mis Citas</button>
                 <button class="btn-outline" id="profileBtn">Mi Perfil</button>
                 <button class="btn-primary" id="loginBtn">Iniciar Sesión</button>
