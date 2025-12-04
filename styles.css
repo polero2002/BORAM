@@ -636,6 +636,36 @@ main {
     color: #cbd5e1;
 }
 
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-link {
+    background: none;
+    border: none;
+    color: #a5b4fc;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    text-decoration: underline;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.footer-separator {
+    color: #64748b;
+    font-size: 1rem;
+}
+
 .footer-copyright {
     margin: 1rem 0 0.5rem 0;
     opacity: 0.8;
@@ -647,6 +677,84 @@ main {
     opacity: 0.7;
     font-size: 0.9rem;
     font-style: italic;
+}
+
+/* ========================================
+   PÁGINA DE TÉRMINOS Y CONDICIONES
+======================================== */
+#termsView {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
+.terms-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.terms-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.terms-header h1 {
+    margin: 0 0 1rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.terms-date {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.terms-content {
+    padding: 2.5rem;
+}
+
+.terms-section {
+    margin-bottom: 2.5rem;
+}
+
+.terms-section h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.terms-section p {
+    color: var(--text-primary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+.terms-section ul,
+.terms-section ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.terms-section li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.terms-footer {
+    padding: 2rem;
+    background-color: #f8f9fa;
+    text-align: center;
 }
 
 /* Responsive */
@@ -1342,6 +1450,56 @@ main {
         font-size: 0.9rem;
     }
 
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-separator {
+        display: none;
+    }
+
+    .footer-link {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    /* Términos y Condiciones responsive */
+    .terms-container {
+        margin: 1rem;
+        border-radius: 15px;
+    }
+
+    .terms-header {
+        padding: 2rem 1rem;
+    }
+
+    .terms-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .terms-date {
+        font-size: 0.85rem;
+    }
+
+    .terms-content {
+        padding: 1.5rem;
+    }
+
+    .terms-section h2 {
+        font-size: 1.25rem;
+    }
+
+    .terms-section p,
+    .terms-section li {
+        font-size: 0.95rem;
+    }
+
+    .terms-footer {
+        padding: 1.5rem;
+    }
+    }
+
     /* Citas compactas */
     .appointments-container {
         padding: 1rem 0.25rem;
@@ -1654,6 +1812,16 @@ main {
 .full-screen-view > .container {
     flex: 1;
     overflow-y: auto;
+}
+
+/* Vista Principal */
+.main-view {
+    display: none;
+    width: 100%;
+}
+
+.main-view.active {
+    display: block;
 }
 
 /* Contenedor de Citas */

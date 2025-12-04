@@ -211,6 +211,12 @@ function setupEventListeners() {
     searchInput.addEventListener('input', applyFilters);
     specialtyFilter.addEventListener('change', applyFilters);
     availabilityFilter.addEventListener('change', applyFilters);
+
+    // Botón de términos y condiciones en el footer
+    const termsBtn = document.getElementById('termsBtn');
+    if (termsBtn) {
+        termsBtn.addEventListener('click', showTermsView);
+    }
 }
 
 // Renderizar catálogo de psicólogos
@@ -493,6 +499,10 @@ function showMainView() {
     // Ocultar vista del test psicológico
     const psychTestView = document.getElementById('psychTestView');
     if (psychTestView) psychTestView.classList.remove('active');
+    
+    // Ocultar vista de términos y condiciones
+    const termsView = document.getElementById('termsView');
+    if (termsView) termsView.classList.remove('active');
     
     const mainNav = document.querySelector('body > nav');
     const hero = document.querySelector('.hero');
@@ -938,6 +948,36 @@ function confirmCancelAppointment() {
 // Ir a la página principal
 function goToHome() {
     showMainView();
+}
+
+// Mostrar vista de términos y condiciones
+function showTermsView() {
+    // Ocultar otras vistas
+    appointmentsView.classList.remove('active');
+    videoCallView.classList.remove('active');
+    
+    const psychTestView = document.getElementById('psychTestView');
+    if (psychTestView) psychTestView.classList.remove('active');
+    
+    // Ocultar elementos principales
+    const mainNav = document.querySelector('body > nav');
+    const hero = document.querySelector('.hero');
+    const filters = document.querySelector('.filters');
+    const main = document.querySelector('main');
+    const footer = document.querySelector('.footer');
+    
+    if (mainNav) mainNav.style.display = 'none';
+    if (hero) hero.style.display = 'none';
+    if (filters) filters.style.display = 'none';
+    if (main) main.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+    
+    // Mostrar vista de términos
+    const termsView = document.getElementById('termsView');
+    if (termsView) {
+        termsView.classList.add('active');
+        window.scrollTo(0, 0);
+    }
 }
 
 // ========================================

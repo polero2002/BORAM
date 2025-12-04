@@ -482,71 +482,203 @@
         </div>
     </div>
 
-    <!-- Navegación -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <img src="logo.png" alt="BORAM Logo" class="logo" style="cursor: pointer;" onclick="goToHome()">
-                <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
+    <!-- Vista Principal -->
+    <div id="mainView" class="main-view active">
+        <!-- Navegación -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="logo.png" alt="BORAM Logo" class="logo" style="cursor: pointer;" onclick="goToHome()">
+                    <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-menu" id="navMenu">
+                    <button class="btn-outline" id="psychTestBtn">🧠 Test de Orientación</button>
+                    <button class="btn-outline" id="myAppointmentsBtn">📅 Mis Citas</button>
+                    <button class="btn-outline" id="profileBtn">Mi Perfil</button>
+                    <button class="btn-primary" id="loginBtn">Iniciar Sesión</button>
+                </div>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-menu" id="navMenu">
-                <button class="btn-outline" id="psychTestBtn">🧠 Test de Orientación</button>
-                <button class="btn-outline" id="myAppointmentsBtn">📅 Mis Citas</button>
-                <button class="btn-outline" id="profileBtn">Mi Perfil</button>
-                <button class="btn-primary" id="loginBtn">Iniciar Sesión</button>
-            </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Header -->
-    <header class="hero">
-        <div class="container">
-            <h1>Encuentra al Psicólogo Perfecto para Ti</h1>
-            <p>Profesionales certificados listos para ayudarte en tu bienestar mental</p>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Buscar por nombre o especialidad...">
-                <button class="btn-primary" id="searchBtn">🔍 Buscar</button>
+        <!-- Header -->
+        <header class="hero">
+            <div class="container">
+                <h1>Encuentra al Psicólogo Perfecto para Ti</h1>
+                <p>Profesionales certificados listos para ayudarte en tu bienestar mental</p>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre o especialidad...">
+                    <button class="btn-primary" id="searchBtn">🔍 Buscar</button>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Filtros -->
-    <section class="filters">
-        <div class="container">
-            <div class="filter-group">
-                <label>Especialidad:</label>
-                <select id="specialtyFilter">
-                    <option value="">Todas</option>
-                    <option value="Ansiedad">Ansiedad</option>
-                    <option value="Depresión">Depresión</option>
-                    <option value="Parejas">Parejas</option>
-                    <option value="Infantil">Infantil</option>
-                    <option value="Familiar">Familiar</option>
-                </select>
+        <!-- Filtros -->
+        <section class="filters">
+            <div class="container">
+                <div class="filter-group">
+                    <label>Especialidad:</label>
+                    <select id="specialtyFilter">
+                        <option value="">Todas</option>
+                        <option value="Ansiedad">Ansiedad</option>
+                        <option value="Depresión">Depresión</option>
+                        <option value="Parejas">Parejas</option>
+                        <option value="Infantil">Infantil</option>
+                        <option value="Familiar">Familiar</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Disponibilidad:</label>
+                    <select id="availabilityFilter">
+                        <option value="">Cualquiera</option>
+                        <option value="inmediata">Inmediata</option>
+                        <option value="esta-semana">Esta semana</option>
+                    </select>
+                </div>
             </div>
-            <div class="filter-group">
-                <label>Disponibilidad:</label>
-                <select id="availabilityFilter">
-                    <option value="">Cualquiera</option>
-                    <option value="inmediata">Inmediata</option>
-                    <option value="esta-semana">Esta semana</option>
-                </select>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Catálogo de Psicólogos -->
-    <main class="container">
-        <h2 class="section-title">Nuestros Profesionales</h2>
-        <div class="psychologists-grid" id="psychologistsGrid">
-            <!-- Los psicólogos se cargarán dinámicamente con JavaScript -->
+        <!-- Catálogo de Psicólogos -->
+        <main class="container">
+            <h2 class="section-title">Nuestros Profesionales</h2>
+            <div class="psychologists-grid" id="psychologistsGrid">
+                <!-- Los psicólogos se cargarán dinámicamente con JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Vista de Términos y Condiciones -->
+    <div id="termsView" class="full-screen-view">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="logo.png" alt="BORAM Logo" class="logo" style="cursor: pointer;" onclick="goToHome()">
+                    <span class="brand-name" style="cursor: pointer;" onclick="goToHome()">BORAM</span>
+                </div>
+                <div class="nav-menu">
+                    <button class="btn-outline" onclick="goToHome()">← Volver al Inicio</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="terms-container">
+                <div class="terms-header">
+                    <h1>📜 Términos y Condiciones</h1>
+                    <p class="terms-date">Última actualización: 3 de diciembre de 2025</p>
+                </div>
+
+                <div class="terms-content">
+                    <div class="terms-section">
+                        <h2>1. Bienvenido a BORAM</h2>
+                        <p>Gracias por usar BORAM. Al entrar a nuestra plataforma, reservar una sesión o crear una cuenta, aceptas estos Términos y Condiciones. Te pedimos leerlos con atención para conocer cómo funciona nuestro servicio.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>2. ¿Qué es BORAM?</h2>
+                        <p>BORAM es una plataforma online que te conecta con psicólogos profesionales. No somos un hospital, clínica ni brindamos atención médica de emergencia. Nuestro objetivo es acercarte apoyo emocional de forma accesible, segura y desde cualquier lugar.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>3. Psicólogos Profesionales</h2>
+                        <p>Todos los psicólogos que colaboran con BORAM cuentan con cédula profesional y experiencia comprobada. Ellos trabajan de manera independiente, y son responsables de la atención que brindan durante tus sesiones.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>4. Cómo usar la plataforma</h2>
+                        <p>Para usar BORAM te pedimos:</p>
+                        <ul>
+                            <li>Ser mayor de 18 años.</li>
+                            <li>Dar información real y actualizada.</li>
+                            <li>No grabar sesiones sin permiso.</li>
+                            <li>Mantener respeto hacia los profesionales.</li>
+                        </ul>
+                        <p>BORAM puede suspender el servicio si se detecta uso indebido.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>5. Limitación de Responsabilidad</h2>
+                        <p><strong>BORAM no es un servicio de emergencia ni de crisis.</strong></p>
+                        <p>En situaciones de riesgo —incluyendo ideación suicida, autolesión, daños a terceros o cualquier evento que requiera intervención inmediata— se deberá contactar:</p>
+                        <ul>
+                            <li><strong>Línea de Emergencias:</strong> 911</li>
+                            <li><strong>Línea de la Vida (CONADIC):</strong> 800 911 2000</li>
+                            <li><strong>Servicios de salud locales</strong></li>
+                        </ul>
+                        <p>BORAM no se hace responsable por daños derivados de omitir la búsqueda de atención urgente cuando sea necesaria.</p>
+                        <p>La información personal, médica y de sesiones será tratada conforme a la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong>.</p>
+                        <p>La plataforma implementa medidas de seguridad para salvaguardar los datos, pero no garantiza protección absoluta frente a posibles vulneraciones.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>6. Cancelaciones y reembolsos</h2>
+                        <ul>
+                            <li>Puedes cancelar tu sesión con <strong>24 horas de anticipación</strong>.</li>
+                            <li>Si no asistes o cancelas fuera de tiempo, no se realiza reembolso.</li>
+                            <li>Si ocurre un problema técnico comprobable de BORAM, te reagendamos sin costo.</li>
+                            <li>Reembolsos solo aplican en casos excepcionales revisados por nuestro equipo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>7. Confidencialidad</h2>
+                        <p>Tu información es totalmente privada. Los datos personales y clínicos se protegen bajo medidas de seguridad y nunca se comparten sin tu autorización. Solo tú y tu psicólogo pueden acceder a tu información clínica.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>8. Expediente clínico</h2>
+                        <p>Tu psicólogo generará un expediente digital. BORAM lo resguarda de forma segura durante el tiempo que marca la ley y tú puedes solicitar acceso cuando lo necesites.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>9. Límites del servicio</h2>
+                        <p>BORAM <strong>no</strong> atiende emergencias emocionales, crisis severas ni situaciones que requieran intervención inmediata. Si estás en riesgo o necesitas ayuda urgente, llama a tu línea local de emergencias o acude a un hospital.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>10. Funcionamiento de la plataforma</h2>
+                        <p>Hacemos nuestro mayor esfuerzo para que la plataforma funcione correctamente. Si alguna falla técnica afecta tu sesión, te ayudaremos a reagendarla.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>11. Cambios en el servicio</h2>
+                        <p>BORAM puede actualizar precios, funciones o políticas. Cualquier cambio será anunciado en nuestros canales oficiales.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>12. Cierre de cuenta</h2>
+                        <p>Puedes cerrar tu cuenta en cualquier momento. BORAM también puede suspenderla si hay:</p>
+                        <ul>
+                            <li>Uso indebido,</li>
+                            <li>Faltas de respeto,</li>
+                            <li>Datos falsos,</li>
+                            <li>Riesgo para los psicólogos o la plataforma.</li>
+                        </ul>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>13. Propiedad</h2>
+                        <p>Todo el contenido de BORAM (marca, textos, diseño, imágenes y software) pertenece exclusivamente a la empresa.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h2>14. ¿Tienes dudas?</h2>
+                        <p>Estamos aquí para ayudarte. Puedes contactarnos por nuestros medios oficiales en caso de dudas sobre tu experiencia o el funcionamiento de la plataforma.</p>
+                    </div>
+                </div>
+
+                <div class="terms-footer">
+                    <button class="btn-primary" onclick="goToHome()" style="width: 100%; max-width: 300px; margin: 0 auto; display: block;">
+                        Volver al Inicio
+                    </button>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -557,6 +689,9 @@
                     <span class="footer-brand-name">BORAM</span>
                 </div>
                 <p class="footer-tagline">Consultoría de Psicología Virtual</p>
+                <div class="footer-links">
+                    <button class="footer-link" id="termsBtn">📜 Términos y Condiciones</button>
+                </div>
                 <p class="footer-copyright">&copy; 2025 BORAM. Todos los derechos reservados.</p>
                 <p class="footer-motto">Cuidando tu salud mental, un día a la vez.</p>
             </div>
